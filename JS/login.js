@@ -12,34 +12,40 @@ $("#signup").click(function() {
     
     
       
-             $(function() {
-               $("form[name='login']").validate({
-                 rules: {
-                   
-                   email: {
-                     required: true,
-                     email: true
-                   },
-                   password: {
-                     required: true,
-                     
-                   }
-                 },
-                  messages: {
-                   email: "Please enter a valid email address",
-                  
-                   password: {
-                     required: "Please enter password",
-                    
-                   }
-                   
-                 },
-                 submitHandler: function(form) {
-                   form.submit();
-                 }
-               });
-             });
-             
+    $(document).ready(function() {
+      // Validate login form
+      $("#loginForm").validate({
+        rules: {
+          email: {
+            required: true,
+            email: true
+          },
+          password: {
+            required: true,
+            minlength: 5
+          }
+        },
+        messages: {
+          email: "Please enter a valid email address",
+          password: {
+            required: "Please provide a password",
+            minlength: "Password must be at least 5 characters long"
+          }
+        },
+        submitHandler: function(form) {
+          // Redirect to the next page if validation passes
+          window.location.href = "interest.html";
+        }
+      });
+    
+      // Prevent default behavior for #log click
+      $("#log").click(function(e) {
+        e.preventDefault(); // Stop form submission
+        if ($("#loginForm").valid()) { // Validate form before redirect
+          $("#loginForm").submit();
+        }
+      });
+    });
     
     
     $(function() {
@@ -74,12 +80,6 @@ $("#signup").click(function() {
       });
     });
     
-    $(document).ready(function() {
-      $("#log").click(function(q){
-        q.preventDefault();
-        window.location.href="../interest.html";
-      });
-    });
     var Fname1;
   function Name(name1,name2) {
     this.Firstname=name1;
